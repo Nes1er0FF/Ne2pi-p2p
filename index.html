@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ne2pi p2p :: не тупи питупи</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00ff00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Ne2pi p2p">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="terminal.css">
+    
+    <!-- Шрифт терминала -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap">
+    
+    <!-- PeerJS -->
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div class="terminal">
+        <!-- Хедер -->
+        <div class="terminal-header">
+            <div class="header-left">
+                <span class="blink">█</span> NE2PI P2P v0.1
+            </div>
+            <div class="header-right">
+                <span id="connection-status" class="status-offline">OFFLINE</span>
+            </div>
+        </div>
+        
+        <!-- Основной контент -->
+        <div class="terminal-body">
+            <!-- Приветственный экран -->
+            <div id="welcome-screen">
+                <div class="ascii-art">
+<pre>
+╔══════════════════════════════════════╗
+║                                      ║
+║  ███╗   ██╗███████╗██████╗ ██╗██████╗║
+║  ████╗  ██║██╔════╝╚════██╗██║██╔══██╗║
+║  ██╔██╗ ██║█████╗   █████╔╝██║██████╔╝║
+║  ██║╚██╗██║██╔══╝   ╚═══██╗██║██╔═══╝ ║
+║  ██║ ╚████║███████╗██████╔╝██║██║     ║
+║  ╚═╝  ╚═══╝╚══════╝╚═════╝ ╚═╝╚═╝     ║
+║                                      ║
+║          p2p messenger               ║
+║         не тупи питупи               ║
+║                                      ║
+╚══════════════════════════════════════╝
+</pre>
+                </div>
+                
+                <div class="command-list">
+                    <div class="command-item">
+                        <span class="prompt">$</span>
+                        <span class="command">create</span>
+                        <span class="description">- создать новую комнату</span>
+                    </div>
+                    <div class="command-item">
+                        <span class="prompt">$</span>
+                        <span class="command">join [code]</span>
+                        <span class="description">- присоединиться к комнате</span>
+                    </div>
+                    <div class="command-item">
+                        <span class="prompt">$</span>
+                        <span class="command">help</span>
+                        <span class="description">- показать команды</span>
+                    </div>
+                    <div class="command-item">
+                        <span class="prompt">$</span>
+                        <span class="command">clear</span>
+                        <span class="description">- очистить экран</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- История терминала -->
+            <div id="terminal-output"></div>
+            
+            <!-- Ввод команды -->
+            <div class="input-line">
+                <span class="prompt">$</span>
+                <input type="text" 
+                       id="command-input" 
+                       autocomplete="off" 
+                       autocorrect="off"
+                       autocapitalize="off"
+                       spellcheck="false"
+                       placeholder="введите команду...">
+            </div>
+        </div>
+        
+        <!-- Футер -->
+        <div class="terminal-footer">
+            <div class="footer-left">
+                <span id="peer-id">peer-id: --</span>
+            </div>
+            <div class="footer-right">
+                <span id="room-info">комната: --</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Звук печати (опционально) -->
+    <audio id="type-sound" preload="auto">
+        <source src="sounds/beep.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Основной скрипт -->
+    <script src="terminal.js"></script>
+</body>
+</html>
