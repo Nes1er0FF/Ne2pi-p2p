@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #000;
+    font-family: 'Source Code Pro', 'Courier New', monospace;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Терминал */
+.terminal {
+    background: #000;
+    color: #00ff00;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Хедер */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.header-left .blink {
+    animation: blink 1s infinite;
+    margin-right: 8px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Статус подключения */
+#connection-status {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.status-online {
+    background: #00ff00;
+    color: #000;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.status-offline {
+    background: #ff0000;
+    color: #fff;
+}
+
+.status-connecting {
+    background: #ffff00;
+    color: #000;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Тело терминала */
+.terminal-body {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ASCII арт */
+.ascii-art {
+    text-align: center;
+    margin: 20px 0 30px;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+/* Список команд */
+.command-list {
+    margin: 20px 0;
+}
+
+.command-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    transition: all 0.2s;
+}
+
+.command-item:hover {
+    background: rgba(0, 255, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.prompt {
+    color: #00ff00;
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 20px;
+}
+
+.command {
+    color: #00ff00;
+    font-weight: bold;
+    margin-right: 15px;
+    min-width: 120px;
+}
+
+.description {
+    color: #00aa00;
+    opacity: 0.8;
+}
+
+/* Вывод терминала */
+#terminal-output {
+    flex-grow: 1;
+    min-height: 100px;
+}
+
+.terminal-line {
+    margin-bottom: 5px;
+    padding: 2px 0;
+    animation: typewriter 0.1s steps(40);
+}
+
+@keyframes typewriter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.line-prompt {
+    color: #00ff00;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.line-command {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.line-output {
+    color: #00aa00;
+    margin-left: 30px;
+}
+
+.line-error {
+    color: #ff5555;
+    margin-left: 30px;
+}
+
+.line-success {
+    color: #55ff55;
+    margin-left: 30px;
+}
+
+.line-system {
+    color: #ffff55;
+    margin-left: 30px;
+    font-style: italic;
+}
+
+/* Линия ввода */
+.input-line {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 255, 0, 0.3);
+    margin-top: 10px;
+}
+
+.input-line .prompt {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#command-input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 16px;
+    outline: none;
+    caret-color: #00ff00;
+}
+
+#command-input::placeholder {
+    color: #00aa00;
+    opacity: 0.5;
+}
+
+/* Футер */
+.terminal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    border-top: 1px solid #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+    font-size: 12px;
+    color: #00aa00;
+}
+
+/* Стили для мобильных */
+@media (max-width: 768px) {
+    .ascii-art {
+        font-size: 10px;
+    }
+    
+    .command-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .command {
+        margin-bottom: 5px;
+    }
+    
+    .terminal-header, .terminal-footer {
+        font-size: 11px;
+    }
+}
+
+/* Прокрутка */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 0, 0.5);
+}
