@@ -177,6 +177,7 @@ class Ne2piTerminal {
     }
     
     async createRoom(roomName) {
+        const normalizedName = roomName.toLowerCase().trim();
         if (this.peer) {
             this.printError('Уже подключен к комнате');
             return;
@@ -311,6 +312,7 @@ class Ne2piTerminal {
     }
     
     async joinRoom(roomName) {
+        const normalizedName = roomName.toLowerCase().trim();
         if (this.peer) {
             this.printError('Уже подключен к комнате');
             return;
@@ -648,9 +650,10 @@ class Ne2piTerminal {
     }
     
     generateRoomId(roomName) {
-        // Создаем уникальный ID на основе названия комнаты
-        const salt = Math.random().toString(36).substring(2, 8);
-        return `ne2pi-${roomName.toLowerCase()}-${salt}`;
+    // Приводим к нижнему регистру и убираем пробелы
+    const normalizedName = roomName.toLowerCase().replace(/\s+/g, '_');
+    const salt = Math.random().toString(36).substring(2, 8);
+    return `ne2pi-${normalizedName}-${salt}`;
     }
     
     saveRoomToHistory(roomName, roomId, isHost) {
